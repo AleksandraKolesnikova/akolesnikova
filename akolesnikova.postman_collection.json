@@ -1,0 +1,126 @@
+{
+	"info": {
+		"name": "akolesnikova",
+		"_postman_id": "2c7d8387-8552-640d-cb7f-42726e445c7b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request1 Get meal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-app-id",
+						"value": "b95d0dcf"
+					},
+					{
+						"key": "x-app-key",
+						"value": "212cbc851fcb0ee6b51095b5f0ebc49d"
+					},
+					{
+						"key": "x-remote-user-id",
+						"value": "0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"query\": \"{{default_meal}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/track-api/v2/natural/nutrients",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"track-api",
+						"v2",
+						"natural",
+						"nutrients"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Request2 Get meal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-app-id",
+						"value": "b95d0dcf"
+					},
+					{
+						"key": "x-app-key",
+						"value": "212cbc851fcb0ee6b51095b5f0ebc49d"
+					},
+					{
+						"key": "x-remote-user-id",
+						"value": "0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"query\": \"{{default_meal}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{tracking_url}}/v2/search/instant?query={{default_meal}}",
+					"host": [
+						"{{tracking_url}}"
+					],
+					"path": [
+						"v2",
+						"search",
+						"instant"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{{default_meal}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
