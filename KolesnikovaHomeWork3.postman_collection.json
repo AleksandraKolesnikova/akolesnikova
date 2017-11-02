@@ -1,0 +1,210 @@
+{
+	"info": {
+		"name": "KolesnikovaHomeWork3",
+		"_postman_id": "b023dfd9-830c-ed72-9488-ff6acf07a35b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Nutritients HomeTask Lesson3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Verify foods array and verify calories, total_fat, sugar for one\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    //verify that \"foods\" array has all the \"food_name\" items from breakfast variable (i.e. in example above it should be eggs, bacon, french toast)",
+							"    pm.expect(jsonData.foods[0].food_name).to.eql(\"eggs\");",
+							"    pm.expect(jsonData.foods[1].food_name).to.eql(\"bacon\");",
+							"    pm.expect(jsonData.foods[2].food_name).to.eql(\"french toast\");",
+							"    ",
+							"    //verify calories, total_fat, sugar for one particular \"food_name\" you can match it by name (use filter function) note - you should get the values first from response and add to your variable to use in tests)",
+							"    var oneElement = jsonData.foods.filter(function(elem){return elem.food_name===\"eggs\";})",
+							"    pm.expect(oneElement[0].nf_calories).to.eql(143);",
+							"    pm.expect(oneElement[0].nf_total_fat).to.eql(9.51);",
+							"    pm.expect(oneElement[0].nf_sugars).to.eql(0.37);",
+							"    console.log(oneElement);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-app-id",
+						"value": "b95d0dcf"
+					},
+					{
+						"key": "x-app-key",
+						"value": "212cbc851fcb0ee6b51095b5f0ebc49d"
+					},
+					{
+						"key": "x-remote-user-id",
+						"value": "0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"query\": \"{{breakfast}}\",\r\n \"timezone\": \"US/Eastern\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/track-api/v2/natural/nutrients",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"track-api",
+						"v2",
+						"natural",
+						"nutrients"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Instant HomeTask Lesson3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Verify that brand_name field for all elements in the list contains value from food_name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(pm.environment.get(\"food\"));",
+							"    console.log(jsonData);",
+							"    jsonData.branded.forEach(function(obj) { pm.expect(obj.brand_name).to.include(pm.environment.get(\"food_name\")) });",
+							"});",
+							"pm.test(\"Verify that at least 3 branded items are returned in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.branded.length > 3).to.be.true",
+							"});",
+							"pm.test(\"Verify that only branded items list is present in the response and no common items list there (just to check how it looks like run query with parameter common - true)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.common).to.eql(undefined);",
+							"    //set env variable \"item\" to value from “nix_item_id” for the first item in the list",
+							"    pm.environment.set(\"item\", jsonData.branded[0].nix_item_id);",
+							"    //set env variable \"brand\" to value from “brand_name” for the first item in the list",
+							"    pm.environment.set(\"brand\", jsonData.branded[0].brand_name);",
+							"    console.log(pm.environment.get(\"item\"));",
+							"    console.log(pm.environment.get(\"brand\"));",
+							"});",
+							"",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set(\"food_name\", \"Eggs\");",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-app-id",
+						"value": "b95d0dcf"
+					},
+					{
+						"key": "x-app-key",
+						"value": "212cbc851fcb0ee6b51095b5f0ebc49d"
+					},
+					{
+						"key": "x-remote-user-id",
+						"value": "0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"query\":\"{{food_name}}\",\r\n \"branded\":true, \r\n \"common\": false, \r\n \"detailed\": false\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/track-api/v2/search/instant",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"track-api",
+						"v2",
+						"search",
+						"instant"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get ItemHomeTask Lesson3",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-app-id",
+						"value": "b95d0dcf"
+					},
+					{
+						"key": "x-app-key",
+						"value": "212cbc851fcb0ee6b51095b5f0ebc49d"
+					},
+					{
+						"key": "x-remote-user-id",
+						"value": "0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url2}}/v2/search/item?nix_item_id={{item}}",
+					"host": [
+						"{{url2}}"
+					],
+					"path": [
+						"v2",
+						"search",
+						"item"
+					],
+					"query": [
+						{
+							"key": "nix_item_id",
+							"value": "{{item}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
