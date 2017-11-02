@@ -20,13 +20,18 @@
 							"    pm.expect(jsonData.foods[0].food_name).to.eql(\"eggs\");",
 							"    pm.expect(jsonData.foods[1].food_name).to.eql(\"bacon\");",
 							"    pm.expect(jsonData.foods[2].food_name).to.eql(\"french toast\");",
-							"    ",
+							"    console.log(jsonData.foods[0].food_name);",
+							"    console.log(jsonData.foods[1].food_name);",
+							"    console.log(jsonData.foods[2].food_name);",
 							"    //verify calories, total_fat, sugar for one particular \"food_name\" you can match it by name (use filter function) note - you should get the values first from response and add to your variable to use in tests)",
 							"    var oneElement = jsonData.foods.filter(function(elem){return elem.food_name===\"eggs\";})",
 							"    pm.expect(oneElement[0].nf_calories).to.eql(143);",
 							"    pm.expect(oneElement[0].nf_total_fat).to.eql(9.51);",
 							"    pm.expect(oneElement[0].nf_sugars).to.eql(0.37);",
-							"    console.log(oneElement);",
+							"    console.log(oneElement[0].food_name);",
+							"    console.log(oneElement[0].nf_calories);",
+							"    console.log(oneElement[0].nf_total_fat);",
+							"    console.log(oneElement[0].nf_sugars);",
 							"});",
 							"",
 							""
@@ -59,12 +64,11 @@
 					"raw": "{\r\n \"query\": \"{{breakfast}}\",\r\n \"timezone\": \"US/Eastern\"\r\n}"
 				},
 				"url": {
-					"raw": "{{url}}/track-api/v2/natural/nutrients",
+					"raw": "{{url}}/v2/natural/nutrients",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"track-api",
 						"v2",
 						"natural",
 						"nutrients"
@@ -84,17 +88,18 @@
 						"exec": [
 							"pm.test(\"Verify that brand_name field for all elements in the list contains value from food_name\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    console.log(pm.environment.get(\"food\"));",
-							"    console.log(jsonData);",
 							"    jsonData.branded.forEach(function(obj) { pm.expect(obj.brand_name).to.include(pm.environment.get(\"food_name\")) });",
+							"    jsonData.branded.forEach(function(obj) { console.log(obj.brand_name) });",
 							"});",
 							"pm.test(\"Verify that at least 3 branded items are returned in the response\", function () {",
 							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData.branded.length);",
 							"    pm.expect(jsonData.branded.length > 3).to.be.true",
 							"});",
 							"pm.test(\"Verify that only branded items list is present in the response and no common items list there (just to check how it looks like run query with parameter common - true)\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.common).to.eql(undefined);",
+							"    console.log(jsonData.common);",
 							"    //set env variable \"item\" to value from “nix_item_id” for the first item in the list",
 							"    pm.environment.set(\"item\", jsonData.branded[0].nix_item_id);",
 							"    //set env variable \"brand\" to value from “brand_name” for the first item in the list",
@@ -112,8 +117,8 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"pm.environment.set(\"food_name\", \"Eggs\");",
-							""
+							"var object = JSON.parse(pm.environment.get(\"food\"));",
+							"pm.environment.set(\"food_name\", object.name);"
 						]
 					}
 				}
@@ -143,12 +148,11 @@
 					"raw": "{\r\n \"query\":\"{{food_name}}\",\r\n \"branded\":true, \r\n \"common\": false, \r\n \"detailed\": false\r\n}"
 				},
 				"url": {
-					"raw": "{{url}}/track-api/v2/search/instant",
+					"raw": "{{url}}/v2/search/instant",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"track-api",
 						"v2",
 						"search",
 						"instant"
@@ -160,6 +164,21 @@
 		},
 		{
 			"name": "Get ItemHomeTask Lesson3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Verify that brand_name fully matches value of brand variable\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData.foods[0].brand_name);",
+							"    pm.expect(jsonData.foods[0].brand_name).to.eql(pm.environment.get(\"brand\"));",
+							"});"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
@@ -185,9 +204,9 @@
 					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
 				},
 				"url": {
-					"raw": "{{url2}}/v2/search/item?nix_item_id={{item}}",
+					"raw": "{{url}}/v2/search/item?nix_item_id={{item}}",
 					"host": [
-						"{{url2}}"
+						"{{url}}"
 					],
 					"path": [
 						"v2",
