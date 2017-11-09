@@ -1,0 +1,696 @@
+{
+	"info": {
+		"name": "VesterTrack",
+		"_postman_id": "f1c9b023-1349-2103-1889-d5c05ee9c399",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"token\", jsonData.access_token);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{pl_auth}}/token?username={{email}}&password={{password}}&client_id=web&client_secret=10hcmObzfZWDIhDdfejksdfJcES4QZinxGJ9nxYLQdaYxB5JJvkZl4nfSf4DdsAj&grant_type=password",
+					"host": [
+						"{{pl_auth}}"
+					],
+					"path": [
+						"token"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"equals": true
+						},
+						{
+							"key": "client_id",
+							"value": "web",
+							"equals": true
+						},
+						{
+							"key": "client_secret",
+							"value": "10hcmObzfZWDIhDdfejksdfJcES4QZinxGJ9nxYLQdaYxB5JJvkZl4nfSf4DdsAj",
+							"equals": true
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"project_id\", jsonData.value);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url_track}}/rest/project/id?username={{email}}&password={{password}}&planroomProjectId=1&Portal-Name=autotest&portalName=autotest",
+					"host": [
+						"{{url_track}}"
+					],
+					"path": [
+						"rest",
+						"project",
+						"id"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"equals": true
+						},
+						{
+							"key": "planroomProjectId",
+							"value": "1",
+							"equals": true
+						},
+						{
+							"key": "Portal-Name",
+							"value": "autotest",
+							"equals": true
+						},
+						{
+							"key": "portalName",
+							"value": "autotest",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/rest/account?username={{email}}&password=Creative11&token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"rest",
+						"account"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "Creative11",
+							"equals": true
+						},
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"equals": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"equals": false
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/rest/projects?username={{email}}&password=Creative11&token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"rest",
+						"projects"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "Creative11",
+							"equals": true
+						},
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Check accounts data for autotest4\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(jsonData.email).to.eql(pm.environment.get(\"autotest4\"));",
+							"    pm.expect(jsonData.firstName).to.eql(\"John\");",
+							"    pm.expect(jsonData.lastName).to.eql(\"Autotest4\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/rest/account?username={{email}}&password={{password}}&token={{token}}&user-name={{autotest4}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"rest",
+						"account"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"equals": true
+						},
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"equals": true
+						},
+						{
+							"key": "user-name",
+							"value": "{{autotest4}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Check accounts data for autotest3\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(jsonData.email).to.eql(pm.environment.get(\"autotest3\"));",
+							"    pm.expect(jsonData.firstName).to.eql(\"John\");",
+							"    pm.expect(jsonData.lastName).to.eql(\"Autotest3\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/rest/account?username={{email}}&password={{password}}&token={{token}}&user-name={{autotest3}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"rest",
+						"account"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"equals": true
+						},
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"equals": true
+						},
+						{
+							"key": "user-name",
+							"value": "{{autotest3}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Check accounts data for autotest2\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(jsonData.email).to.eql(pm.environment.get(\"autotest2\"));",
+							"    pm.expect(jsonData.firstName).to.eql(\"John\");",
+							"    pm.expect(jsonData.lastName).to.eql(\"Autotest2\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/rest/account?username={{email}}&password={{password}}&token={{token}}&user-name={{autotest2}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"rest",
+						"account"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"equals": true
+						},
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"equals": true
+						},
+						{
+							"key": "user-name",
+							"value": "{{autotest2}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Issue lists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Chech scope of issue lists for Autotest project\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(jsonData.length === 3).to.be.true",
+							"    pm.expect(jsonData[0].name).to.eql(\"autotest_3_ILO\");",
+							"    pm.expect(jsonData[1].name).to.eql(\"autotest_4_ILM\");",
+							"    pm.expect(jsonData[2].name).to.eql(\"Skyscraper issue list\");",
+							"    pm.environment.set(\"issue_list_id_autotest_3_ILO\", jsonData[0].id);",
+							"    pm.environment.set(\"issue_list_id_autotest_4_ILM\", jsonData[1].id);",
+							"    pm.environment.set(\"issue_list_id_Skyscraper issue list\", jsonData[2].id);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Portal-Name",
+						"value": "autotest"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url_track}}/rest/project/{{project_id}}/user/issuelist?username={{email}}&password={{password}}",
+					"host": [
+						"{{url_track}}"
+					],
+					"path": [
+						"rest",
+						"project",
+						"{{project_id}}",
+						"user",
+						"issuelist"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Check Issue lists metadata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Chech scope of issue lists for Autotest project\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(jsonData.length === 3).to.be.true",
+							"    pm.expect(jsonData[0].name).to.eql(\"autotest_3_ILO\");",
+							"    pm.expect(jsonData[1].name).to.eql(\"autotest_4_ILM\");",
+							"    pm.expect(jsonData[2].name).to.eql(\"Skyscraper issue list\");",
+							"    pm.environment.set(\"issue_list_id_autotest_3_ILO\", jsonData[0].id);",
+							"    pm.environment.set(\"issue_list_id_autotest_4_ILM\", jsonData[1].id);",
+							"    pm.environment.set(\"issue_list_id_Skyscraper issue list\", jsonData[2].id);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Portal-Name",
+						"value": "autotest"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url_track}}/rest/project/{{project_id}}/user/issuelist?username={{email}}&password={{password}}",
+					"host": [
+						"{{url_track}}"
+					],
+					"path": [
+						"rest",
+						"project",
+						"{{project_id}}",
+						"user",
+						"issuelist"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"equals": true
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Check Issue creation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Chech metadata of autotest_3_ILO\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(jsonData.createIssueAllowed).to.eql(true);",
+							"    pm.expect(jsonData.buildings[0].name).to.eql(\"Building #1\");",
+							"    pm.expect(jsonData.buildings[0].floors[0].name).to.eql(\"First floor\");",
+							"    pm.expect(jsonData.buildings[0].floors[1].name).to.eql(\"Second floor\");",
+							"    pm.expect(jsonData.buildings[0].floors[2].name).to.eql(\"Third floor\");",
+							"    ",
+							"    pm.expect(jsonData.trades[0].name).to.eql(\"autotest_1_TO\");",
+							"    pm.expect(jsonData.trades[0].issueTypes[0].name).to.eql(\"autotest_1_type_1\");",
+							"    pm.expect(jsonData.trades[0].issueTypes[1].name).to.eql(\"autotest_1_type_2\");",
+							"    pm.expect(jsonData.trades[0].issueTypes[2].name).to.eql(\"autotest_1_type_3\");",
+							"",
+							"    pm.expect(jsonData.useTradePrefix).to.eql(true);",
+							"    pm.expect(jsonData.workflow).to.eql(\"Standard\"); ",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Portal-Name",
+						"value": "autotest"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url_track}}/rest/project/{{project_id}}/user/issuelist/{{issue_list_id_autotest_3_ILO}}?account-restricted=true",
+					"host": [
+						"{{url_track}}"
+					],
+					"path": [
+						"rest",
+						"project",
+						"{{project_id}}",
+						"user",
+						"issuelist",
+						"{{issue_list_id_autotest_3_ILO}}"
+					],
+					"query": [
+						{
+							"key": "account-restricted",
+							"value": "true",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
