@@ -622,7 +622,7 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"pm.test(\"Chech metadata of autotest_3_ILO\", function () {",
+							"/*pm.test(\"Chech metadata of autotest_3_ILO\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    console.log(jsonData);",
 							"    pm.response.to.have.status(200);",
@@ -640,7 +640,7 @@
 							"    pm.expect(jsonData.useTradePrefix).to.eql(true);",
 							"    pm.expect(jsonData.workflow).to.eql(\"Standard\"); ",
 							"",
-							"});",
+							"});*/",
 							"",
 							""
 						]
@@ -668,7 +668,7 @@
 					"raw": "{\r\n \"nix_item_id\":\"{{item}}\"\r\n}"
 				},
 				"url": {
-					"raw": "{{url_track}}/rest/project/{{project_id}}/user/issuelist/{{issue_list_id_autotest_3_ILO}}?account-restricted=true",
+					"raw": "{{url_track}}/rest/project/{{project_id}}/user/issuelist/{{issue_list_id_autotest_3_ILO}}/issue/3d629d48-a58a-4bbc-a913-e322b96de818",
 					"host": [
 						"{{url_track}}"
 					],
@@ -678,14 +678,9 @@
 						"{{project_id}}",
 						"user",
 						"issuelist",
-						"{{issue_list_id_autotest_3_ILO}}"
-					],
-					"query": [
-						{
-							"key": "account-restricted",
-							"value": "true",
-							"equals": true
-						}
+						"{{issue_list_id_autotest_3_ILO}}",
+						"issue",
+						"3d629d48-a58a-4bbc-a913-e322b96de818"
 					]
 				},
 				"description": ""
